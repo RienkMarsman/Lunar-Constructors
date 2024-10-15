@@ -16,10 +16,10 @@ def generate_launch_description():
     namePackage = 'mobile_robot'
     
     # Relative path to the Xacro file defining the model
-    modelFileRelativePath = 'model/robot.xacro'
+    modelFileRelativePath = 'model/robot_arms.xacro'
     # Relative path to the Gazebo world file
-    worldFileRelativePath = 'model/empty_world.world'
-    
+    #worldFileRelativePath = 'model/empty_world.world'
+    worldFileRelativePath = 'worlds/garden.sdf'
     # Absolute path to the model
     pathModelFile = os.path.join(get_package_share_directory(namePackage), modelFileRelativePath)
     #pathModelFile = '/home/mikolaj/ws_mobile/src/mobile_robot/model'

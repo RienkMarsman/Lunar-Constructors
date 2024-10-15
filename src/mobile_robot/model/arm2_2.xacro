@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="half_cylinder_revolute_joint_with_links">
+
+  <!-- Define materials to use for the links -->
+  <material name="grey2">
+    <color rgba="0.71 0.71 0.7 1"/>
+  </material>
+
+  
+  <!-- Base link -->
+  <link name="base_link_2">
+    <visual>
+      <geometry>
+        <box size="0.15 0.15 0.05"/>  <!-- Width, Depth, Height -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Positioned at the origin -->
+      <material name="grey2"/>  <!-- Base link color -->
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.2 0.2 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Revolute Joint (Half-Cylinder) -->
+  <joint name="revolute_joint_2" type="revolute">
+    <parent link="base_link_2"/>
+    <child link="joint_link_2"/>
+    <origin xyz="0 0 0.025" rpy="0 0.8 0"/>  <!-- Positioned at the center of the half-cylinder -->
+    <axis xyz="0 1 0"/>  <!-- Revolute around the y-axis -->
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/> <!-- Limits for the joint -->
+    <dynamics damping="10" friction="10"/>
+  </joint>
+
+  <!-- Link representing the revolute joint as a half-cylinder -->
+  <link name="joint_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>  <!-- Full cylinder length and radius -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Rotate to lie on its side -->
+      <material name="grey2"/>  <!-- Material color -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- First Cylindrical Link -->
+  <joint name="cylindrical_link_joint_2" type="revolute">
+    <parent link="joint_link_2"/>
+    <child link="cylindrical_link_2"/>
+    <origin xyz="0 0 0.15" rpy="0 0.1 0"/>  <!-- Positioned at the end of the half-cylinder -->
+    <axis xyz="0 0 1"/>  <!-- Revolute around the z-axis -->
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/> <!-- Limits for the joint -->
+    <dynamics damping="10" friction="10"/>
+  </joint>
+
+  <!-- Link representing the cylindrical link -->
+  <link name="cylindrical_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>  <!-- Cylindrical link definition -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Centered on the joint -->
+      <material name="grey2"/>  <!-- Set the material to blue -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>  <!-- Same length as the visual -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Second Revolute Joint (Full Cylinder) -->
+  <joint name="second_revolute_joint_2" type="revolute">
+    <parent link="cylindrical_link_2"/>
+    <child link="second_joint_link_2"/>
+    <origin xyz="0 0 0.2" rpy="0 1 0"/>  <!-- Positioned at the end of the first cylindrical link -->
+    <axis xyz="0 1 0"/>  <!-- Revolute around the y-axis to match the orientation -->
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/> <!-- Limits for the joint -->
+    <dynamics damping="10" friction="10"/>
+  </joint>
+
+  <!-- Link representing the second revolute joint as a full cylinder -->
+  <link name="second_joint_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>  <!-- Full cylinder length and radius -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Centered on the joint, rotated to lie on its side -->
+      <material name="grey2"/>  <!-- Set the material to blue -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.3"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- New Cylindrical Link connected to the Second Revolute Joint -->
+  <joint name="third_revolute_joint_2" type="revolute">
+    <parent link="second_joint_link_2"/>
+    <child link="third_link_2"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>  <!-- Positioned at the end of the second joint link -->
+    <axis xyz="0 0 1"/>  <!-- Revolute around the z-axis -->
+    <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/> <!-- Limits for the joint -->
+    <dynamics damping="10" friction="10"/>
+  </joint>
+
+  <!-- Link representing the new cylindrical link -->
+  <link name="third_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.45" radius="0.025"/>  <!-- New cylindrical link definition -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Centered on the joint -->
+      <material name="grey2"/>  <!-- Set the material to grey -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.45" radius="0.025"/>  <!-- Same length as the visual -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- New Solid Cylindrical Link at the end of the third link -->
+  <joint name="solid_cylinder_joint_2" type="fixed">
+    <parent link="third_link_2"/>
+    <child link="solid_cylinder_link_2"/>
+    <origin xyz="0 0 0.275" rpy="0 0 0"/>  <!-- Positioned at the end of the third link -->
+  </joint>
+
+  <!-- Link representing the new solid cylindrical link -->
+  <link name="solid_cylinder_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>  <!-- Solid cylindrical link definition -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Rotated to match the second revolute joint -->
+      <material name="grey2"/>  <!-- Set the material to grey -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- New Prismatic Joint -->
+  <joint name="prismatic_joint_2" type="prismatic">
+    <parent link="solid_cylinder_link_2"/>
+    <child link="prismatic_link_2"/>
+    <origin xyz="0 -0.1 0" rpy="0 0 0"/>  <!-- Positioned at the end of the solid cylinder link -->
+    <axis xyz="0 1 0"/>  <!-- Prismatic along the y-axis -->
+    <limit lower="0" upper="0.3" effort="100" velocity="0.1"/> <!-- Limits for the joint -->
+    <dynamics damping="10" friction="10"/>
+  </joint>
+
+  <!-- Link representing the prismatic extension -->
+  <link name="prismatic_link_2">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.03"/>  <!-- New prismatic link definition -->
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Rotated to match the joint -->
+      <material name="grey2"/>  <!-- Set the material to orange -->
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>  <!-- Same position for collision -->
+    </collision>
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+</robot>
+

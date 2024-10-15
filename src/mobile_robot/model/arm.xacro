@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<robot name="arm">
+  <xacro:include filename="arm_model.sdf" />
+</robot>
+
