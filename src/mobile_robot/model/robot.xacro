@@ -6,6 +6,8 @@
 
 <robot name="differential_drive_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <xacro:property name="scale" value=".005" />
+
     <!-- Body Dimensions -->
     <xacro:property name="body_link_x_dim" value="1" />
     <xacro:property name="body_link_y_dim" value="0.6" />
@@ -120,16 +122,18 @@
     <link name="wheel1_link">
         <visual>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </visual>
 
         <collision>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </collision>
 
         <xacro:inertia_wheel />
@@ -159,16 +163,18 @@
     <link name="wheel2_link">
         <visual>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </visual>
 
         <collision>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </collision>
 
         <xacro:inertia_wheel />
@@ -197,16 +203,17 @@
     <link name="wheel3_link">
         <visual>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </visual>
-
         <collision>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </collision>
 
         <xacro:inertia_wheel />
@@ -235,16 +242,18 @@
     <link name="wheel4_link">
         <visual>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </visual>
 
         <collision>
             <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
+                <mesh filename="$(find mobile_robot)/meshes/lunar_zebro_legs.dae"
+                    scale="${scale} ${scale} ${scale}" />
             </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
         </collision>
 
         <xacro:inertia_wheel />
@@ -253,34 +262,7 @@
     <!-- ####################### -->
     <!-- END: Left front wheel and joint-->
     <!-- ####################### -->
-    <joint name="wheel5_joint" type="continuous">
-        <parent link="body_link" />
-        <child link="wheel5_link" />
-        <origin
-            xyz="0 0 ${wheel_link_z_location}"
-            rpy="0 0 0" />
-        <axis xyz="0 1 0" />
-        <limit effort="1000" velocity="1000" />
-        <dynamics damping="1.0" friction="1.0" />
-    </joint>
 
-    <link name="wheel5_link">
-        <visual>
-            <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
-            </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
-        </visual>
-
-        <collision>
-            <geometry>
-                <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}" />
-            </geometry>
-            <origin rpy="${pi_const/2} 0 0" xyz="0 0 0" />
-        </collision>
-
-        <xacro:inertia_wheel />
-    </link>
 
     <!-- ####################### -->
     <!-- Camera Link -->
@@ -305,7 +287,6 @@
             <geometry>
                 <box size="${camera_link} ${camera_link} ${camera_link}" />
             </geometry>
-            <material name="red" />
         </visual>
 
         <inertial>

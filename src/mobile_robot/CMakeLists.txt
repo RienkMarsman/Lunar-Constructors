@@ -15,7 +15,7 @@ find_package(ament_lint_auto REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
-  DIRECTORY launch model
+  DIRECTORY launch model meshes
   DESTINATION share/${PROJECT_NAME}
  )
 if(BUILD_TESTING)
