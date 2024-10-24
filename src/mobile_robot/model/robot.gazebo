@@ -37,6 +37,11 @@
     <material>Gazebo/Yellow</material>
   </gazebo>
 
+  <gazebo reference="wheel5_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
 
   <!-- ####################### -->
   <!-- Controler for the 4 wheeler -->
