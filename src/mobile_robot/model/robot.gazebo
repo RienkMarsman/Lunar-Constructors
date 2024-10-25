@@ -37,12 +37,18 @@
     <material>Gazebo/Yellow</material>
   </gazebo>
 
-  <gazebo reference="wheel5_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <material>Gazebo/Yellow</material>
-  </gazebo>
 
+    <gazebo reference="wheel5_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
+    <gazebo reference="wheel6_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Yellow</material>
+    </gazebo>
   <!-- ####################### -->
   <!-- Controler for the 4 wheeler -->
   <!-- ####################### -->
@@ -53,14 +59,15 @@
         <namespace> </namespace>
       </ros>
       <!-- Number of wheel pairs -->
-      <num_wheel_pairs>2</num_wheel_pairs>
+      <num_wheel_pairs>3</num_wheel_pairs>
 
       <!-- Wheels -->
-      <left_joint>wheel4_joint</left_joint>
-      <right_joint>wheel3_joint</right_joint>
-      <left_joint>wheel2_joint</left_joint>
-      <right_joint>wheel1_joint</right_joint>
-
+            <left_joint>wheel4_joint</left_joint>
+            <right_joint>wheel3_joint</right_joint>
+            <left_joint>wheel6_joint</left_joint>
+            <right_joint>wheel5_joint</right_joint>
+            <left_joint>wheel2_joint</left_joint>
+            <right_joint>wheel1_joint</right_joint>
       <!-- Kinematics -->
       <wheel_separation>${body_link_y_dim+wheel_link_length}</wheel_separation>
       <wheel_diameter>${wheel_link_radius}</wheel_diameter>

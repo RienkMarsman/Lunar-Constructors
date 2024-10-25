@@ -35,7 +35,7 @@ class RoverControl(Node):
 
             twist = Twist()
             if average_brightness > 100:  # Adjust this threshold as needed
-                twist.linear.x = -0.2  # Move forward
+                twist.linear.x = 0.2  # Move forward
             else:
                 twist.angular.z = 0.1  # Turn
 
